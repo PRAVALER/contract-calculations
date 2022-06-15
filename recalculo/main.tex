@@ -4,6 +4,7 @@
   import,
   amssymb,
   amsfonts,
+  fancyhdr,
   mathtools,
   enumitem,
   varwidth,
@@ -11,6 +12,10 @@
   indentfirst
 }
 
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[L]{Recálculo}
+\fancyhead[R]{Liberação de Crédito}
 \linespread{1.25}
 \pdfpkresolution=300
 \titlespacing*{\section}{0pt}{5.5ex plus 1ex minus .2ex}{4.3ex plus .2ex}
@@ -72,7 +77,7 @@
         \begin{enumerate}
           \item{$vi$\@: valor inicial da parcela}
           \item{$vf$\@: valor financiado}
-          \item{$C$\@: uma constante nao definida tida como 0,01}
+          \item{$C$\@: uma constante não definida tida como 0,01}
         \end{enumerate}
       \end{varwidth}
     \end{center}
@@ -82,43 +87,90 @@
 \section{Cálculo da parcela}{
   O cálculo passa por uma série de repetições dentro de outras repetições.
   Muitas dessas repetições têm por objetivo, por exemplo, determinar a taxa de
-  juros, através de uma simulação que, por sua vez, propõe atingir um
-  determinado valor.
+  juros, através de uma simulação de cálculos. Essas simulações propõe atingir um
+  determinado valor, funcionando como um critério de parada.
 
   \subsection{Cálculo do pagamento}{
     Essa etapa é responsável pelo cálculo do valor da parcela e do valor amortizado.
     Entretanto, para que isso seja possível, é necessário termos em mãos o valor
     do \textbf{fator de cálculo total}.
 
-    \subsection{Cálculo do pagamento}{
+    \subsection{Fator de cálculo}{
       O fator de cálculo é obtido através da soma dos fatores parcias ($f_{p_{i}}$)
-      que são obtidos através da lista de prazos ($P$) previamente definida.
+      que são obtidos através da lista de prazos ($P$) previamente definida. Esse
+      procedimento nos fornecerá um conjunto de fatores parciais possibilitando
+      o cálculo de fator de cálculo total através da soma dos mesmos. Portanto,
+      assuma $F$ como o conjunto desses fatores parciais.
+      \begin{equation*}
+        F = \{f_{p_{1}}, \ldots, f_{p_{k}}\}
+      \end{equation*}
+      \pagebreak
+
       \begin{equation}
-        \fatorparcial
+        \fatorparcial \rightarrow f_{t} = \sum\limits_{i = 1} ^ {k} f_{p_{i}}
       \end{equation}
+      \begin{equation*}\therefore\end{equation*}
+      \begin{equation}\fatortotal\end{equation}
       \vspace{0.1mm}
       \begin{center}
         \begin{varwidth}{\textwidth}
           \begin{enumerate}
+            \item{$f_{p_{i}}$\@: fator parcial do cálculo}
+            \item{$p_{i}$: um elemento qualquer do conjunto de prazos}
+            \item{$f_{t}$\@: fator de cálculo total}
             \item{$f_{p_{i}}$\@: fator parcial do cálculo}
             \item{$p_{i}$: um elemento qualquer do conjunto de prazos}
           \end{enumerate}
         \end{varwidth}
       \end{center}
-      \vspace{5mm}
+    }
 
-      Tendo a list dos fatores parciais em mãos, obtemos fator de cálculo total
-      através da soma dos mesmos.
+    \subsection{Cálculo da parcela}{
+      Neste momento, somos capazes de efetuar o cálculo do valor da parcela.
       \begin{equation}
-        f_{t} = \sum\limits_{i = 1} ^ {k} \razaopadrao
+        vp = \frac{vf}{f_{t}} \rightarrow \parcela
       \end{equation}
       \vspace{0.1mm}
       \begin{center}
         \begin{varwidth}{\textwidth}
           \begin{enumerate}
-            \item{$f_{t}$\@: fator de cálculo total}
-            \item{$f_{p_{i}}$\@: fator parcial do cálculo}
-            \item{$p_{i}$: um elemento qualquer do conjunto de prazos}
+            \item{$vp$\@: valor da parcela}
+          \end{enumerate}
+        \end{varwidth}
+      \end{center}
+    }
+
+    \subsection{Cálculo do valor amortizado}{
+      Outro calculo realizado pelo recálculo é o cálculo do valor amortizado.
+      Para isso, precisamos calcular o juros referente à cada prazo.
+      \begin{equation}
+        \juros
+      \end{equation}
+      \vspace{0.1mm}
+      \begin{center}
+        \begin{varwidth}{\textwidth}
+          \begin{enumerate}
+            \item{$j_{i}$\@: juros referente a um prazo}
+            \item{$s_{i}$\@: saldo devedor referente a um prazo}
+            \item{$p_{i} ^ \prime$\@: prazo anterior ao prazo atual}
+            \item{$i$\@: número variando \{1 $\ldots$ k\}}
+          \end{enumerate}
+        \end{varwidth}
+      \end{center}
+      \vspace{5mm}
+
+      Esse cálculo nos possibilita calcular o valor amortizado total.
+      \begin{equation}
+        a_{i} = vp - j_{i} \rightarrow \amortizado
+      \end{equation}
+      \begin{equation*}\therefore\end{equation*}
+      \begin{equation}\amortizadosimplificado\end{equation}
+      \vspace{0.1mm}
+      \begin{center}
+        \begin{varwidth}{\textwidth}
+          \begin{enumerate}
+            \item{$j_{i}$\@: juros referente a um prazo}
+            \item{$a_{t}$\@: amortizado total}
           \end{enumerate}
         \end{varwidth}
       \end{center}
