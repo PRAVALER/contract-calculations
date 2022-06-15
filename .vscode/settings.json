@@ -1,0 +1,6 @@
+{
+  "makefile.extensionOutputFolder": "./.vscode",
+  "conventionalCommits.scopes": [
+    "config"
+  ]
+}
