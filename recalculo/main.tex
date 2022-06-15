@@ -18,40 +18,112 @@
 
 \begin{document}
 \input{./formulas/parametros.sty}
+\input{./formulas/parcela.sty}
 \input{./formulas/juros.sty}
 \title{Recálculo}
 \author{Liberação de Crédito}
 \maketitle
-\section{Introdução}{
-  Os cálculos iniciam com a preparação de algumas informações, como:
-  \begin{equation}
-    \taxajuros
-  \end{equation}
-  \vspace{0.1mm}
-  \begin{center}
-    \begin{varwidth}{\textwidth}
-      \begin{enumerate}
-        \item{$t$\@: taxa de juros do contrato}
-        \item{$j$\@: taxa de juros mensal}
-      \end{enumerate}
-    \end{varwidth}
-  \end{center}
-  \vspace{5mm}
 
-  O conjunto de prazos que são a diferença, em dias, entre a data da concessão
-  e a data de vencimento da parcela, predefinida na etapa de formalização.
-  \begin{equation}
-    \prazo
-  \end{equation}
-  \vspace{0.1mm}
-  \begin{center}
-    \begin{varwidth}{\textwidth}
-      \begin{enumerate}
-        \item{$p$\@: prazo elemento de P, com p $\in$ $\mathbb{N_{+}^*}$}
-        \item{$k$\@: a quantidade de parcelas, com k $\in$ $\mathbb{N_{+}^*}$}
-      \end{enumerate}
-    \end{varwidth}
-  \end{center}
-  \vspace{5mm}
+\section{Introdução}{
+  O recálculo é um processo que permite ao cliente ajustar o valor do seu crédito
+  de acordo com as suas necessidades. No caso, ajustar o valor das parcelas com
+  base na data de concessão.
+
+  \subsection{Preparação das informações}{
+    Os cálculos iniciam com a preparação de algumas informações, como:
+    \begin{equation}
+      \taxajuros
+    \end{equation}
+    \vspace{0.1mm}
+    \begin{center}
+      \begin{varwidth}{\textwidth}
+        \begin{enumerate}
+          \item{$t$\@: taxa de juros do contrato}
+          \item{$j$\@: taxa de juros mensal}
+        \end{enumerate}
+      \end{varwidth}
+    \end{center}
+    \vspace{5mm}
+
+    O conjunto de prazos que são a diferença, em dias, entre a data da concessão
+    e a data de vencimento da parcela, predefinida na etapa de formalização.
+    \begin{equation}
+      \prazo
+    \end{equation}
+    \vspace{0.1mm}
+    \begin{center}
+      \begin{varwidth}{\textwidth}
+        \begin{enumerate}
+          \item{$p$\@: prazo elemento de P, com p $\in$ $\mathbb{N_{+}^*}$}
+          \item{$k$\@: a quantidade de parcelas, com k $\in$ $\mathbb{N_{+}^*}$}
+        \end{enumerate}
+      \end{varwidth}
+    \end{center}
+    \vspace{5mm}
+
+    O valor inicial da parcela entendido, essencialmente, como a razão entre o
+    valor financiado e a quantidade de parcelas, menos um valor fixo.
+    \begin{equation}
+      \valorinicial
+    \end{equation}
+    \vspace{0.1mm}
+    \begin{center}
+      \begin{varwidth}{\textwidth}
+        \begin{enumerate}
+          \item{$vi$\@: valor inicial da parcela}
+          \item{$vf$\@: valor financiado}
+          \item{$C$\@: uma constante nao definida tida como 0,01}
+        \end{enumerate}
+      \end{varwidth}
+    \end{center}
+  }
+ }
+
+\section{Cálculo da parcela}{
+  O cálculo passa por uma série de repetições dentro de outras repetições.
+  Muitas dessas repetições têm por objetivo, por exemplo, determinar a taxa de
+  juros, através de uma simulação que, por sua vez, propõe atingir um
+  determinado valor.
+
+  \subsection{Cálculo do pagamento}{
+    Essa etapa é responsável pelo cálculo do valor da parcela e do valor amortizado.
+    Entretanto, para que isso seja possível, é necessário termos em mãos o valor
+    do \textbf{fator de cálculo total}.
+
+    \subsection{Cálculo do pagamento}{
+      O fator de cálculo é obtido através da soma dos fatores parcias ($f_{p_{i}}$)
+      que são obtidos através da lista de prazos ($P$) previamente definida.
+      \begin{equation}
+        \fatorparcial
+      \end{equation}
+      \vspace{0.1mm}
+      \begin{center}
+        \begin{varwidth}{\textwidth}
+          \begin{enumerate}
+            \item{$f_{p_{i}}$\@: fator parcial do cálculo}
+            \item{$p_{i}$: um elemento qualquer do conjunto de prazos}
+          \end{enumerate}
+        \end{varwidth}
+      \end{center}
+      \vspace{5mm}
+
+      Tendo a list dos fatores parciais em mãos, obtemos fator de cálculo total
+      através da soma dos mesmos.
+      \begin{equation}
+        f_{t} = \sum\limits_{i = 1} ^ {k} \razaopadrao
+      \end{equation}
+      \vspace{0.1mm}
+      \begin{center}
+        \begin{varwidth}{\textwidth}
+          \begin{enumerate}
+            \item{$f_{t}$\@: fator de cálculo total}
+            \item{$f_{p_{i}}$\@: fator parcial do cálculo}
+            \item{$p_{i}$: um elemento qualquer do conjunto de prazos}
+          \end{enumerate}
+        \end{varwidth}
+      \end{center}
+      \vspace{5mm}
+    }
+  }
  }
 \end{document}
