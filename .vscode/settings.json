@@ -1,6 +1,7 @@
 {
   "makefile.extensionOutputFolder": "./.vscode",
   "conventionalCommits.scopes": [
-    "config"
+    "config",
+    "biblioteca-calculos"
   ]
 }
