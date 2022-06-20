@@ -3,6 +3,7 @@
   "conventionalCommits.scopes": [
     "config",
     "biblioteca-calculos",
-    "parcela"
+    "parcela",
+    "projeto"
   ]
 }
