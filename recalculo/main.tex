@@ -95,7 +95,7 @@
     Entretanto, para que isso seja possível, é necessário termos em mãos o valor
     do \textbf{fator de cálculo total}.
 
-    \subsection{Fator de cálculo}{
+    \subsubsection{Fator de cálculo}{
       O fator de cálculo é obtido através da soma dos fatores parcias ($f_{p_{i}}$)
       que são obtidos através da lista de prazos ($P$) previamente definida. Esse
       procedimento nos fornecerá um conjunto de fatores parciais possibilitando
@@ -125,9 +125,9 @@
       \end{center}
     }
 
-    \subsection{Cálculo da parcela}{
+    \subsubsection{Cálculo da parcela}{
       Neste momento, somos capazes de efetuar o cálculo do valor da parcela.
-      \begin{equation}
+      \begin{equation} \label{eq:parcela}
         vp = \frac{vf}{f_{t}} \rightarrow \parcela
       \end{equation}
       \vspace{0.1mm}
@@ -140,7 +140,7 @@
       \end{center}
     }
 
-    \subsection{Cálculo do valor amortizado}{
+    \subsubsection{Cálculo do valor amortizado}{
       Outro calculo realizado pelo recálculo é o cálculo do valor amortizado.
       Para isso, precisamos calcular o juros referente à cada prazo.
       \begin{equation}
@@ -174,58 +174,68 @@
           \end{enumerate}
         \end{varwidth}
       \end{center}
-      \vspace{5mm}
     }
   }
 
-  \subsection{Cálculo do valor financiado com IOF}{
-    Esse é mais um passo do cálculo do contrato. Para que seja possível a obtenção
-    deste valor, usamos como input o valor do da parcela anteriormente calculado.
-    Num primeiro momento, é necessário que tenhamos o valor presente da parcela
-    $(vpp_{i})$ referente ao prazo do conjunto de prazos.
-    \begin{equation}
-      \valorPresenteParcela
-    \end{equation}
-    \vspace{0.1mm}
-    \begin{center}
-      \begin{varwidth}{\textwidth}
-        \begin{enumerate}
-          \item{$vpp_{i}$\@: juros referente a um prazo}
-          \item{$y$\@: pode ser o prazo ou uma constante}
-          \subitem $$
-            y = \begin{cases}
-              p_{i}, & \text{se houver aplicação de IOF no contrato}\\
-              365, & \text{caso contrário}
-            \end{cases}
-          $$
-        \end{enumerate}
-      \end{varwidth}
-    \end{center}
-    \vspace{5mm}
+\section{Cálculo do valor financiado com IOF}{
+    Esse é mais um passo fundamental para o cálculo do contrato. Para que seja
+    possível a obtenção deste valor, usamos como input o valor do da parcela
+    anteriormente calculado.
     
-    Assim como a operação do valor presente parcial, também dependemos do valor
-    do IOF total.
-    \begin{equation}
-      \iofFinalParcial
-    \end{equation}
-    \vspace{0.1mm}
-    \begin{center}
-      \begin{varwidth}{\textwidth}
-        \begin{enumerate}
-          \item{$iof_{a}$\@: IOF adicional, uma contante fixa no valor de 0.38}
-          \item{$iof_{d}$\@: IOF diário, uma contante fixa no valor de 0.0082}
-        \end{enumerate}
-      \end{varwidth}
-    \end{center}
-    \vspace{5mm}
+    \subsection{Cálculo do valor presente da parcela}{
+      Num primeiro momento, é necessário que tenhamos o valor presente da parcela
+      $(vpp_{i})$ referente ao prazo do conjunto de prazos.
+      \begin{equation}
+        \valorPresenteParcela
+      \end{equation}
+      \vspace{0.1mm}
+      \begin{center}
+        \begin{varwidth}{\textwidth}
+          \begin{enumerate}
+            \item{$vpp_{i}$\@: juros referente a um prazo}
+            \item{$y$\@: pode ser o prazo ou uma constante}
+            \subitem $$
+              y = \begin{cases}
+                p_{i}, & \text{se houver aplicação de IOF no contrato}\\
+                365, & \text{caso contrário}
+              \end{cases}
+            $$
+          \end{enumerate}
+        \end{varwidth}
+      \end{center}
+    }
 
-    Importante notar que tanto $iof_{a}$ como $iof_{d}$ podem ser zerados, caso
-    não haja aplicabilidade de IOF no contrato. Com o cálculo do $iof_{f,i}$
-    conseguimos deduzir o IOF total.
-    \begin{equation}
-      \iofTotal
-    \end{equation}
-    \vspace{5mm}
+    \subsection{Cálculo do valor presente da parcela}{
+      Assim como a operação do valor presente parcial, também dependemos do valor
+      do IOF parcial que será usado para o cálculo do IOF total.
+      \begin{equation}
+        \iofFinalParcial
+      \end{equation}
+      \vspace{0.1mm}
+      \begin{center}
+        \begin{varwidth}{\textwidth}
+          \begin{enumerate}
+            \item{$iof_{a}$\@: IOF adicional, uma contante fixa no valor de 0.38}
+            \item{$iof_{d}$\@: IOF diário, uma contante fixa no valor de 0.0082}
+          \end{enumerate}
+        \end{varwidth}
+      \end{center}
+      \vspace{5mm}
+
+      Importante notar que tanto $iof_{a}$ como $iof_{d}$ podem ser zerados, caso
+      não haja aplicabilidade de IOF no contrato. Com o cálculo do $iof_{f,i}$
+      conseguimos deduzir o IOF total.
+      \begin{equation}
+        \iofTotal
+      \end{equation}
+    }
+
+    \subsection{Cálculo do valor financiado com IOF}{
+      Finalmente, temos o que precisamos para calcular o valor financiado.
+      \begin{equation}
+        vf ^ \prime = iof_{t} \cdot \frac{vf}{vf - iof_{t}}
+      \end{equation}
+    }
   }
  }
 \end{document}
