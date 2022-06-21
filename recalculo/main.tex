@@ -237,11 +237,54 @@
 \section{Cálculo do $CET_{am}$}{
   Fomos guiados até esse momento para que podéssemos calcular o CET ao mês, isto
   é, custo efetivo total referente ao contrato. Entretando, prepararemos alguns
-  dados, pois são requisitos da operção, são eles:
-  \begin{itemize}
-    \item{Cálculo do valor incremental final}
-    \item{Cálculo da taxa juros}
-  \end{itemize}
+  dados, pois são requisitos da operção.
+
+  \subsection{Cálculo do juros}{
+    Para calcular o juros, excutamos uma operação incremental que atualizará o
+    juros aos poucos. O juros será influenciado por uma variável chamada parcial,
+    que possui como objetivo atingir o valor financiado. Logo, suponha a função
+    $g(pa)$ que retorna o valor do parcial após k iterações. A função $g(pa)$
+    será executada um número indeterminado de vezes e, conforme dito anteriormente,
+    a taxa de juros sofrerá alterações. Ou seja, ela dependerá do limite de $g(pa)$
+    quando o parcial ($pa$) tende ao valor financiado ($vf$):
+    \begin{equation}
+      \lim_{pa \to vf} g(pa_{j}) = (f \circ f \circ \ldots \circ f)(pa_{j})
+    \end{equation}
+
+    onde $f(pa)$:
+    \begin{equation}
+      f(pa) = pa + \Bigg[\frac{vp}{(1 + t_{j}) ^ {\frac{p_{i}}{30}}}\Bigg]
+    \end{equation}
+    \vspace{0.1mm}
+    \begin{center}
+      \begin{varwidth}{\textwidth}
+        \begin{enumerate}
+          \item{$pa$\@: parcial}
+          \item{$t_{j}$\@: juros calculado}
+          \item{$f(pa)$\@: função parte do cálculo do parcial}
+        \end{enumerate}
+      \end{varwidth}
+    \end{center}
+    \vspace{5mm}
+
+    Para cada iteração de $g(pa)$ o juros $t_{j + 1}$ é obtido da seguinte forma:
+    \begin{equation}
+      t_{j + 1} = t_{j} + I
+    \end{equation}
+    \vspace{0.1mm}
+    \begin{center}
+      \begin{varwidth}{\textwidth}
+        \begin{enumerate}
+          \item{$t_{j + 1}$\@: o próximo valor do juros}
+          \item{$I$\@: incremento pré definido no valor de 0,00001}
+        \end{enumerate}
+      \end{varwidth}
+    \end{center}
+  }
+ }
+
+\section{Cálculo valor limite da parcela}{
+  Limite da parcela
 
   \subsection{Cálculo valor incremental final}{
     Para isso retornamos ao cálculo do valor da parcela (\ref{eq:parcela}), mas
@@ -259,9 +302,6 @@
         \end{enumerate}
       \end{varwidth}
     \end{center}
-  }
-
-  \subsection{Cálculo valor incremental final}{
   }
  }
 \end{document}
