@@ -301,9 +301,9 @@
   que foi descrito no item (\ref{eq:parcela}) ou o valor limite da parcela ($vl$)
   e podemos escrever da seguinte maneira:
   $$
-    y = \begin{cases}
-      vp > vl \rightarrow   & vp = vl \\
-      vp <= vl, \rightarrow & vp
+    vp = \begin{cases}
+      vl, & vp > vl  \\
+      vp, & vp <= vl
     \end{cases}
   $$
 
@@ -338,173 +338,296 @@
   }
  }
 
-\section{Cálculo final dos valores do $CETam$ e $CETaa$}{
-  O processo de obtenção dos valores pode ser dividida em alguns passos, desde
-  a preparação dos dados até a execução dos algorítimos.
+\section{Consolidação e atualização dos contratos}{
+  A partir de agora é proposto a obtenção dos valores finais que atualizarão os
+  contratos de uma cessão. Para isso, abaixo, descreveremos uma coletânea de
+  operação e, no final, apresentaremos os atributos do contrato que sofrerão
+  essas modificações.
 
-  \subsection{Preparação dos dados}{
-    Antes de iniciarmos as operações para obtenção dessas informações, precisamos
-    preparar as variáveis que serão usadas durante o processo. É importante salientar
-    que algumas delas serão atualizadas no decorrer dos cálculos. Teremos:
-    \begin{itemize}
-      \item{$v_{t}$\@: valor total no valor igual 0}
-      \item{$x_{1}$\@: um tipo de taxa igual inicial a 0}
-      \item{$x_{1} ^ \prime$\@: um tipo de taxa inicial igual a 0.01}
-      \item{$g$\@: chute inicial no valor de 0.01}
-      \item{$CET$\@: conjunto especial de elementos. Veja abaixo:}
-            \begin{center}
-              $CET = \{\alpha_{1}, \cdots, \alpha_{k + 1}\}$ onde
-              $\alpha_{1} = vf \cdot (-1)\ \land\ $
-              $\alpha_{i} = vp$
-            \end{center}
-            \begin{center}
-              Considerando $i = \{2, \cdots, k + 1\}$
-            \end{center}
-      \item{$CET_{d}$\@ = \{0, P\}, conjunto com os prazos iniciando em zero}
-            \begin{center}
-              $CET_{d} = \{d_{1}, \cdots, d_{k + 1}\}$ onde
-              $d_{1} = 0\ \land\ $
-              $d_{i} \in P$
-            \end{center}
-            \begin{center}
-              Considerando $i = \{2, \cdots, k + 1\}$
-            \end{center}
-      \item{$f_{1}$: componente determinante no cálculo}
-            \begin{center}
-              $
-                f_{1} = \xnvpFUm
-              $
-              onde $
-                $$
-                  C = \begin{cases}
-                    -v_{t}, & v_{t} > 0  \\
-                    0,      & v_{t} <= 0
-                  \end{cases}
-                $$
-              $
-            \end{center}
-      \item{$f_{2}$: componente determinante no cálculo}
-            \begin{center}
-              $
-                f_{2} = \xnvpFDois
-              $
-              onde $
-                $$
-                  C = \begin{cases}
-                    -v_{t}, & v_{t} > 0  \\
-                    0,      & v_{t} <= 0
-                  \end{cases}
-                $$
-              $
-            \end{center}
-    \end{itemize}
+  \subsection{Valor das prestações}{
+    Em muitas ocasiões nessa documentação tratamos do valor da parcela, entretanto,
+    a partir deste ponto, o sistema entenderá como prestação. Dito isso, essa etapa
+    será responsável pela produção de um conjunto de prestações com dois elementos.
+    Esse conjunto dependerá do tipo do aluno. Último ponto e não menos importante,
+    nós entenderemos esse conjunto pela letra M e seus elementos como $\mu_{1}$
+    e $\mu_{2}$. Veja:
+
+    \subsubsection{Prestações para aluno novo sem contrato conjunto}{
+      Cálculo do valor de adesão:
+      \begin{equation}
+        v_{a} = \frac{m_{d} \cdot t_{a}}{100}
+      \end{equation}
+      \vspace{0.1mm}
+      \begin{center}
+        \begin{varwidth}{\textwidth}
+          \begin{enumerate}
+            \item{$v_{a}$\@: valor da adesão do aluno}
+            \item{$t_{a}$\@: taxa de adesão do aluno}
+            \item{$m_{d}$\@: mensalidade calculada na etapa de contratação}
+          \end{enumerate}
+        \end{varwidth}
+      \end{center}
+      \vspace{5mm}
+
+      Cálculo da primeira prestação:
+      \begin{equation}
+        \mu_{1} = vp + \frac{m_{d} \cdot t_{adm}}{100} + v_{a} + L \text{, onde }
+        L = \begin{cases}
+          0,     & \text{isento de tarifa} \\
+          t_{p}, & \text{caso contrário}
+        \end{cases}
+      \end{equation}
+      \vspace{0.1mm}
+      \begin{center}
+        \begin{varwidth}{\textwidth}
+          \begin{enumerate}
+            \item{$\mu_{1}$\@: cálculo da primeira prestações}
+            \item{$L$\@: tarifa da parcela}
+            \item{$t_{adm}$\@: taxa de administração}
+          \end{enumerate}
+        \end{varwidth}
+      \end{center}
+      \vspace{5mm}
+
+      Cálculo da segunda prestação:
+      \begin{equation}
+        \mu_{2} = vp + \frac{m_{d}}{100} + v_{a} + L
+      \end{equation}
+      \vspace{0.1mm}
+      \begin{center}
+        \begin{varwidth}{\textwidth}
+          \begin{enumerate}
+            \item{$\mu_{2}$\@: cálculo da primeira prestações}
+          \end{enumerate}
+        \end{varwidth}
+      \end{center}
+      \vspace{5mm}
+    }
+
+    \subsubsection{Prestações para aluno novo com contrato conjunto}{
+      Cálculo da primeira prestação:
+      \begin{equation}
+        \mu_{1} = vp + \frac{m_{d} \cdot t_{adm}}{100} + L \text{, onde }
+        L = \begin{cases}
+          0,     & \text{isento de tarifa} \\
+          t_{p}, & \text{caso contrário}
+        \end{cases}
+      \end{equation}
+      \vspace{0.1mm}
+      \begin{center}
+        \begin{varwidth}{\textwidth}
+          \begin{enumerate}
+            \item{$\mu_{1}$\@: cálculo da primeira prestações}
+            \item{$L$\@: tarifa da parcela}
+            \item{$t_{adm}$\@: taxa de administração}
+          \end{enumerate}
+        \end{varwidth}
+      \end{center}
+      \vspace{5mm}
+
+      Cálculo da segunda prestação:
+      \begin{equation}
+        \mu_{2} = vp + \frac{m_{d}}{100} + v_{a} + L
+      \end{equation}
+      \vspace{0.1mm}
+      \begin{center}
+        \begin{varwidth}{\textwidth}
+          \begin{enumerate}
+            \item{$\mu_{2}$\@: cálculo da primeira prestações}
+          \end{enumerate}
+        \end{varwidth}
+      \end{center}
+      \vspace{5mm}
+    }
+
+    \subsubsection{Prestações para aluno renovação}{
+      Cálculo da primeira e segunda prestações:
+      \begin{equation}
+        \mu_{1} = \mu_{2} = vp + \frac{m_{d} \cdot t_{adm}}{100}
+      \end{equation}
+      \vspace{5mm}
+    }
   }
+ }
 
-  \subsection{Encontrando as taxas $x_{t}$ e $x_{t} ^ \prime$}{
-    A partir desse ponto iniciaremos uma série de interações onde os critérios de
-    parada serão:
-    \begin{itemize}
-      \item{O atingimento do número máximo de execuções ou}
-      \item{$f_{1} \cdot f_{2} = 0$}
-    \end{itemize}
-    Logo, a cada iteração, definiremos o valor de $f_{1}$:
-    \begin{equation*}
-      x_{j + 1} = (x_{j} - x_{j} ^ \prime) \cdot 1.6 + x_{j} \longleftrightarrow |f_{1}| < |f_{2}|
-    \end{equation*}
-    \begin{equation*}
-      f_{1} = \begin{cases}
-        \xnvpFUm, & \longleftrightarrow |f_{1}| < |f_{2}| \\
-        f_{1},    & \text{caso contrário}
-      \end{cases}
-    \end{equation*}
-    Bem como o valor de $f_{2}$:
-    \begin{equation*}
-      \taxaDois \longleftrightarrow |f_{1}| >= |f_{2}|
-    \end{equation*}
-    \begin{equation*}
-      f_{1} = \begin{cases}
-        \xnvpFDois, & \longleftrightarrow |f_{1}| < |f_{2}| \\
-        f_{1},      & \text{caso contrário}
-      \end{cases}
-    \end{equation*}
-    Ao final teremos um conjunto com todas os valores de  $x_{t}$ e $x_{t} ^ \prime$,
-    possibilitando o cálculo das taxas totais para ambos. Em termos matemáticos:
-    \begin{equation*}
-      x_{i} \in X = \{x_{1}, \cdots, x_{n}\}
-    \end{equation*}
-    \begin{equation*}
-      x_{i} ^ \prime \in X ^ \prime = \{x_{1} ^ \prime, \cdots, x_{n} ^ \prime\}
-    \end{equation*}
-    \begin{equation}
-      x_{t} = x_{1} + \sum\limits_{i = 1} ^ {n} [\taxaUmModule]
-    \end{equation}
-    \begin{equation}
-      x_{t} ^ \prime = x_{1} ^ \prime + \sum\limits_{i = 1} ^ {n} [\taxaDoisModule]
-    \end{equation}
-  }
+\section{Desperdício computacional}{
+  Esta sessão procura evidenciar um dos problemas latentes dentro do processamento
+  da cessão. Trata-se do custo computacional que temos na execução de algorítimos
+  extensos e complexos. Abaixo modelamos esses cálculos para garantir que, de fato,
+  essas operações, realmente não são necessárias.
 
-  \subsection{Obtenção do valor do $CET_{aa}$}{
-    Considere a configuração de algumas variáveis:
-    \begin{equation}
-      \beta = C + \sum\limits_{i = 1} ^ {k + 1} \frac{\alpha_{i}}{(1 + x_{t}) ^ \frac{d_{i}}{365}}
-    \end{equation}
-    $$
-      rtb = \begin{cases}
-        x_{t},          & \longleftrightarrow \beta < 0 \\
-        x_{t} ^ \prime, & \text{caso contrário}
-      \end{cases}
-    $$
-    \vspace{0.1mm}
-    $$
-      dx = \begin{cases}
-        x_{t} ^ \prime - x_{t}, & \longleftrightarrow \beta < 0 \\
-        x_{t} - x_{t} ^ \prime, & \text{caso contrário}
-      \end{cases}
-    $$
-    \vspace{5mm}
+  Bem como procurar encontrar a razão pela qual o produto dessas operações parecem
+  incongruentes, isto é, pode ser que pela não execução dos mesmos, tenhamos esse
+  resultado.
 
-    No processo o $CET_{aa}$ é entendido como $h$ e suas iterações terão como
-    critério de parada se $f(h) < 1 \cdot 10 ^ {-8}\ \lor\ |dx| < 1 \cdot 10 ^ {-8}$
-    e ocorrerão da seguinte forma:
-    $$
-      dx_{i + 1} = dx_{i} \cdot 0,5 \rightarrow dx_{i + 1} = \frac{dx_{i}}{2}
-    $$
-    \vspace{0.1mm}
-    $$
-      h = rtb + dx_{i}\ \land\
-      f(h) = C + \sum\limits_{i = 1} ^ {k + 1} \frac{\alpha_{i}}{(1 + h) ^ \frac{d_{i}}{365}}
-    $$
-    \vspace{0.1mm}
-    $$
-      rtb = \begin{cases}
-        h,   & \longleftrightarrow f(h) <= 0 \\
-        rtb, & \text{caso contrário}
-      \end{cases}
-    $$
-    $$\therefore$$
-    \begin{center}
-      $
-        CET_{aa} = f(h)
-        \text{ em determinada etapa do processo de interações}
-      $
-    \end{center}
-  }
+  \subsection{Cálculo dos valores $CETam$ e $CETaa$}{
+    O processo de obtenção dos valores pode ser dividida em alguns passos, desde
+    a preparação dos dados até a execução dos algorítimos.
 
-  \subsection{Obtenção do valor do $CET_{am}$}{
-    Para a alegria de muitos, $CET_{am}$ é mais simples de ser achado:
-    \begin{equation}
-      CET_{am} = [(1 + CET_{aa}) ^ {(\frac{30}{365})}] - 1
-    \end{equation}
-  }
+    \subsubsection{Preparação dos dados}{
+      Antes de iniciarmos as operações para obtenção dessas informações, precisamos
+      preparar as variáveis que serão usadas durante o processo. É importante salientar
+      que algumas delas serão atualizadas no decorrer dos cálculos. Teremos:
+      \begin{itemize}
+        \item{$v_{t}$\@: valor total no valor igual 0}
+        \item{$x_{1}$\@: um tipo de taxa igual inicial a 0}
+        \item{$x_{1} ^ \prime$\@: um tipo de taxa inicial igual a 0.01}
+        \item{$g$\@: chute inicial no valor de 0.01}
+        \item{$CET$\@: conjunto especial de elementos. Veja abaixo:}
+              \begin{center}
+                $CET = \{\alpha_{1}, \cdots, \alpha_{k + 1}\}$ onde
+                $\alpha_{1} = vf \cdot (-1)\ \land\ $
+                $\alpha_{i} = vp$
+              \end{center}
+              \begin{center}
+                Considerando $i = \{2, \cdots, k + 1\}$
+              \end{center}
+        \item{$CET_{d}$\@ = \{0, P\}, conjunto com os prazos iniciando em zero}
+              \begin{center}
+                $CET_{d} = \{d_{1}, \cdots, d_{k + 1}\}$ onde
+                $d_{1} = 0\ \land\ $
+                $d_{i} \in P$
+              \end{center}
+              \begin{center}
+                Considerando $i = \{2, \cdots, k + 1\}$
+              \end{center}
+        \item{$f_{1}$: componente determinante no cálculo}
+              \begin{center}
+                $
+                  f_{1} = \xnvpFUm
+                $
+                onde $
+                  $$
+                    C = \begin{cases}
+                      -v_{t}, & v_{t} > 0  \\
+                      0,      & v_{t} <= 0
+                    \end{cases}
+                  $$
+                $
+              \end{center}
+        \item{$f_{2}$: componente determinante no cálculo}
+              \begin{center}
+                $
+                  f_{2} = \xnvpFDois
+                $
+                onde $
+                  $$
+                    C = \begin{cases}
+                      -v_{t}, & v_{t} > 0  \\
+                      0,      & v_{t} <= 0
+                    \end{cases}
+                  $$
+                $
+              \end{center}
+      \end{itemize}
+    }
 
-  \subsection{Fator crítico de mudança}{
-    Ambos os cálculos podem tornar-se zerados, vide regra abaixo:
-    \begin{equation*}
-      CET_{aa} = 0 \longleftrightarrow CET_{aa} < 0
-    \end{equation*}
-    \begin{equation*}
-      CET_{am} = 0 \longleftrightarrow CET_{am} < 0
-    \end{equation*}
+    \subsubsection{Encontrando as taxas $x_{t}$ e $x_{t} ^ \prime$}{
+      A partir desse ponto iniciaremos uma série de interações onde os critérios de
+      parada serão:
+      \begin{itemize}
+        \item{O atingimento do número máximo de execuções ou}
+        \item{$f_{1} \cdot f_{2} = 0$}
+      \end{itemize}
+      Logo, a cada iteração, definiremos o valor de $f_{1}$:
+      \begin{equation*}
+        x_{j + 1} = (x_{j} - x_{j} ^ \prime) \cdot 1.6 + x_{j} \longleftrightarrow |f_{1}| < |f_{2}|
+      \end{equation*}
+      \begin{equation*}
+        f_{1} = \begin{cases}
+          \xnvpFUm, & \longleftrightarrow |f_{1}| < |f_{2}| \\
+          f_{1},    & \text{caso contrário}
+        \end{cases}
+      \end{equation*}
+      Bem como o valor de $f_{2}$:
+      \begin{equation*}
+        \taxaDois \longleftrightarrow |f_{1}| >= |f_{2}|
+      \end{equation*}
+      \begin{equation*}
+        f_{1} = \begin{cases}
+          \xnvpFDois, & \longleftrightarrow |f_{1}| < |f_{2}| \\
+          f_{1},      & \text{caso contrário}
+        \end{cases}
+      \end{equation*}
+      Ao final teremos um conjunto com todas os valores de  $x_{t}$ e $x_{t} ^ \prime$,
+      possibilitando o cálculo das taxas totais para ambos. Em termos matemáticos:
+      \begin{equation*}
+        x_{i} \in X = \{x_{1}, \cdots, x_{n}\}
+      \end{equation*}
+      \begin{equation*}
+        x_{i} ^ \prime \in X ^ \prime = \{x_{1} ^ \prime, \cdots, x_{n} ^ \prime\}
+      \end{equation*}
+      \begin{equation}
+        x_{t} = x_{1} + \sum\limits_{i = 1} ^ {n} [\taxaUmModule]
+      \end{equation}
+      \begin{equation}
+        x_{t} ^ \prime = x_{1} ^ \prime + \sum\limits_{i = 1} ^ {n} [\taxaDoisModule]
+      \end{equation}
+    }
+
+    \subsubsection{Obtenção do valor do $CET_{aa}$}{
+      Considere a configuração de algumas variáveis:
+      \begin{equation}
+        \beta = C + \sum\limits_{i = 1} ^ {k + 1} \frac{\alpha_{i}}{(1 + x_{t}) ^ \frac{d_{i}}{365}}
+      \end{equation}
+      $$
+        rtb = \begin{cases}
+          x_{t},          & \longleftrightarrow \beta < 0 \\
+          x_{t} ^ \prime, & \text{caso contrário}
+        \end{cases}
+      $$
+      \vspace{0.1mm}
+      $$
+        dx = \begin{cases}
+          x_{t} ^ \prime - x_{t}, & \longleftrightarrow \beta < 0 \\
+          x_{t} - x_{t} ^ \prime, & \text{caso contrário}
+        \end{cases}
+      $$
+      \vspace{5mm}
+
+      No processo o $CET_{aa}$ é entendido como $h$ e suas iterações terão como
+      critério de parada se $f(h) < 1 \cdot 10 ^ {-8}\ \lor\ |dx| < 1 \cdot 10 ^ {-8}$
+      e ocorrerão da seguinte forma:
+      $$
+        dx_{i + 1} = dx_{i} \cdot 0,5 \rightarrow dx_{i + 1} = \frac{dx_{i}}{2}
+      $$
+      \vspace{0.1mm}
+      $$
+        h = rtb + dx_{i}\ \land\
+        f(h) = C + \sum\limits_{i = 1} ^ {k + 1} \frac{\alpha_{i}}{(1 + h) ^ \frac{d_{i}}{365}}
+      $$
+      \vspace{0.1mm}
+      $$
+        rtb = \begin{cases}
+          h,   & \longleftrightarrow f(h) <= 0 \\
+          rtb, & \text{caso contrário}
+        \end{cases}
+      $$
+      $$\therefore$$
+      \begin{center}
+        $
+          CET_{aa} = f(h)
+          \text{ em determinada etapa do processo de interações}
+        $
+      \end{center}
+    }
+
+    \subsubsection{Obtenção do valor do $CET_{am}$}{
+      Para a alegria de muitos, $CET_{am}$ é mais simples de ser achado:
+      \begin{equation}
+        CET_{am} = [(1 + CET_{aa}) ^ {(\frac{30}{365})}] - 1
+      \end{equation}
+    }
+
+    \subsubsection{Fator crítico de mudança}{
+      Ambos os cálculos podem tornar-se zerados, vide regra abaixo:
+      \begin{equation*}
+        CET_{aa} = 0 \longleftrightarrow CET_{aa} < 0
+      \end{equation*}
+      \begin{equation*}
+        CET_{am} = 0 \longleftrightarrow CET_{am} < 0
+      \end{equation*}
+    }
   }
  }
 \end{document}
