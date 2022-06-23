@@ -99,7 +99,6 @@
       \begin{equation*}
         F = \{f_{p_{1}}, \ldots, f_{p_{k}}\}
       \end{equation*}
-      \pagebreak
 
       \begin{equation}
         \fatorParcial \rightarrow f_{t} = \sum\limits_{i = 1} ^ {k} f_{p_{i}}
@@ -234,13 +233,13 @@
   }
  }
 
-\section{Cálculo do $CET_{am}$}{
-  Fomos guiados até esse momento para que podéssemos calcular o CET ao mês, isto
-  é, custo efetivo total referente ao contrato. Entretando, prepararemos alguns
-  dados, pois são requisitos da operção.
+\section{Cálculo do $CET_{am}$ parcial}{
+  Fomos guiados até esse momento para que pudéssemos calcular o CET ao mês, isto
+  é, custo efetivo total referente ao contrato. Entretanto, prepararemos alguns
+  dados, pois são requisitos da operação.
 
   \subsection{Cálculo do juros}{
-    Para calcular o juros, excutamos uma operação incremental que atualizará o
+    Para calcular o juros, executamos uma operação incremental que atualizará o
     juros aos poucos. O juros será influenciado por uma variável chamada parcial,
     que possui como objetivo atingir o valor financiado. Logo, suponha a função
     $g(pa)$ que retorna o valor do parcial após k iterações. A função $g(pa)$
@@ -248,12 +247,12 @@
     a taxa de juros sofrerá alterações. Ou seja, ela dependerá do limite de $g(pa)$
     quando o parcial ($pa$) tende ao valor financiado ($vf$):
     \begin{equation}
-      \lim_{pa \to vf} g(pa_{j}) = (f \circ f \circ \ldots \circ f)(pa_{j})
+      \limitVF
     \end{equation}
 
     onde $f(pa)$:
     \begin{equation}
-      f(pa) = pa + \Bigg[\frac{vp}{(1 + t_{j}) ^ {\frac{p_{i}}{30}}}\Bigg]
+      \parcial
     \end{equation}
     \vspace{0.1mm}
     \begin{center}
@@ -269,7 +268,7 @@
 
     Para cada iteração de $g(pa)$ o juros $t_{j + 1}$ é obtido da seguinte forma:
     \begin{equation}
-      t_{j + 1} = t_{j} + I
+      \cetParcial
     \end{equation}
     \vspace{0.1mm}
     \begin{center}
@@ -280,16 +279,43 @@
         \end{enumerate}
       \end{varwidth}
     \end{center}
+    \vspace{5mm}
+
+    Logo para obtermos o juros total, efetuamos a soma dos juros parciais:
+    \begin{equation}
+      t ^ \prime = \sum\limits_{j = 1} ^ {n} t_{j}
+    \end{equation}
+  }
+
+  \subsection{Consolidação do CET}{
+    A partir desse ponto é possível calcularmos o valor do CET:
+    \begin{equation}
+      CET_{am} = t ^ \prime \cdot 100
+    \end{equation}
   }
  }
 
 \section{Cálculo valor limite da parcela}{
-  Limite da parcela
+  Esse é o ponto das operações de cálculo em que é decidido um dos possíveis
+  valores finais da parcela. Será definido que a parcela assumirá o valor encontrado
+  que foi descrito no item (\ref{eq:parcela}) ou o valor limite da parcela ($vl$)
+  e podemos escrever da seguinte maneira:
+  $$
+    y = \begin{cases}
+      vp > vl \rightarrow   & vp = vl \\
+      vp <= vl, \rightarrow & vp
+    \end{cases}
+  $$
+
+  Para que possamos definir o valor do valor limite da parcela é necessário calcularmos
+  o valor incremental final.
 
   \subsection{Cálculo valor incremental final}{
-    Para isso retornamos ao cálculo do valor da parcela (\ref{eq:parcela}), mas
-    dessa vez tendo o valor financiado com IOF (\ref{eq:vfIof}) como input.
-    Teremos então:
+    O valor incremental também é entendido como o valor financiado com IOF pelo
+    processo como é feito hoje. Dito isso, para o cálculo do valor incremental,
+    retornamos ao cálculo do valor da parcela (\ref{eq:parcela}), mas dessa vez
+    tendo o valor financiado com IOF (\ref{eq:vfIof}) como input. Logo, teremos
+    o valor incremental será:
     \begin{equation}
       \parcelaPrime
     \end{equation}
@@ -297,11 +323,188 @@
     \begin{center}
       \begin{varwidth}{\textwidth}
         \begin{enumerate}
-          \item{$vf ^ \prime$\@: valor financiado com IOF}
+          \item{$\mathcal{E}$\@: valor financiado com IOF}
           \item{$vp ^ \prime$\@: valor da parcela}
         \end{enumerate}
       \end{varwidth}
     \end{center}
+  }
+
+  \subsection{Cálculo da parcela final}{
+    O valor limite da parcela é obtido através da seguinte equação:
+    \begin{equation}
+      \valorLimiteParcelaSimple
+    \end{equation}
+  }
+ }
+
+\section{Cálculo final dos valores do $CETam$ e $CETaa$}{
+  O processo de obtenção dos valores pode ser dividida em alguns passos, desde
+  a preparação dos dados até a execução dos algorítimos.
+
+  \subsection{Preparação dos dados}{
+    Antes de iniciarmos as operações para obtenção dessas informações, precisamos
+    preparar as variáveis que serão usadas durante o processo. É importante salientar
+    que algumas delas serão atualizadas no decorrer dos cálculos. Teremos:
+    \begin{itemize}
+      \item{$v_{t}$\@: valor total no valor igual 0}
+      \item{$x_{1}$\@: um tipo de taxa igual inicial a 0}
+      \item{$x_{1} ^ \prime$\@: um tipo de taxa inicial igual a 0.01}
+      \item{$g$\@: chute inicial no valor de 0.01}
+      \item{$CET$\@: conjunto especial de elementos. Veja abaixo:}
+            \begin{center}
+              $CET = \{\alpha_{1}, \cdots, \alpha_{k + 1}\}$ onde
+              $\alpha_{1} = vf \cdot (-1)\ \land\ $
+              $\alpha_{i} = vp$
+            \end{center}
+            \begin{center}
+              Considerando $i = \{2, \cdots, k + 1\}$
+            \end{center}
+      \item{$CET_{d}$\@ = \{0, P\}, conjunto com os prazos iniciando em zero}
+            \begin{center}
+              $CET_{d} = \{d_{1}, \cdots, d_{k + 1}\}$ onde
+              $d_{1} = 0\ \land\ $
+              $d_{i} \in P$
+            \end{center}
+            \begin{center}
+              Considerando $i = \{2, \cdots, k + 1\}$
+            \end{center}
+      \item{$f_{1}$: componente determinante no cálculo}
+            \begin{center}
+              $
+                f_{1} = \xnvpFUm
+              $
+              onde $
+                $$
+                  C = \begin{cases}
+                    -v_{t}, & v_{t} > 0  \\
+                    0,      & v_{t} <= 0
+                  \end{cases}
+                $$
+              $
+            \end{center}
+      \item{$f_{2}$: componente determinante no cálculo}
+            \begin{center}
+              $
+                f_{2} = \xnvpFDois
+              $
+              onde $
+                $$
+                  C = \begin{cases}
+                    -v_{t}, & v_{t} > 0  \\
+                    0,      & v_{t} <= 0
+                  \end{cases}
+                $$
+              $
+            \end{center}
+    \end{itemize}
+  }
+
+  \subsection{Encontrando as taxas $x_{t}$ e $x_{t} ^ \prime$}{
+    A partir desse ponto iniciaremos uma série de interações onde os critérios de
+    parada serão:
+    \begin{itemize}
+      \item{O atingimento do número máximo de execuções ou}
+      \item{$f_{1} \cdot f_{2} = 0$}
+    \end{itemize}
+    Logo, a cada iteração, definiremos o valor de $f_{1}$:
+    \begin{equation*}
+      x_{j + 1} = (x_{j} - x_{j} ^ \prime) \cdot 1.6 + x_{j} \longleftrightarrow |f_{1}| < |f_{2}|
+    \end{equation*}
+    \begin{equation*}
+      f_{1} = \begin{cases}
+        \xnvpFUm, & \longleftrightarrow |f_{1}| < |f_{2}| \\
+        f_{1},    & \text{caso contrário}
+      \end{cases}
+    \end{equation*}
+    Bem como o valor de $f_{2}$:
+    \begin{equation*}
+      \taxaDois \longleftrightarrow |f_{1}| >= |f_{2}|
+    \end{equation*}
+    \begin{equation*}
+      f_{1} = \begin{cases}
+        \xnvpFDois, & \longleftrightarrow |f_{1}| < |f_{2}| \\
+        f_{1},      & \text{caso contrário}
+      \end{cases}
+    \end{equation*}
+    Ao final teremos um conjunto com todas os valores de  $x_{t}$ e $x_{t} ^ \prime$,
+    possibilitando o cálculo das taxas totais para ambos. Em termos matemáticos:
+    \begin{equation*}
+      x_{i} \in X = \{x_{1}, \cdots, x_{n}\}
+    \end{equation*}
+    \begin{equation*}
+      x_{i} ^ \prime \in X ^ \prime = \{x_{1} ^ \prime, \cdots, x_{n} ^ \prime\}
+    \end{equation*}
+    \begin{equation}
+      x_{t} = x_{1} + \sum\limits_{i = 1} ^ {n} [\taxaUmModule]
+    \end{equation}
+    \begin{equation}
+      x_{t} ^ \prime = x_{1} ^ \prime + \sum\limits_{i = 1} ^ {n} [\taxaDoisModule]
+    \end{equation}
+  }
+
+  \subsection{Obtenção do valor do $CET_{aa}$}{
+    Considere a configuração de algumas variáveis:
+    \begin{equation}
+      \beta = C + \sum\limits_{i = 1} ^ {k + 1} \frac{\alpha_{i}}{(1 + x_{t}) ^ \frac{d_{i}}{365}}
+    \end{equation}
+    $$
+      rtb = \begin{cases}
+        x_{t},          & \longleftrightarrow \beta < 0 \\
+        x_{t} ^ \prime, & \text{caso contrário}
+      \end{cases}
+    $$
+    \vspace{0.1mm}
+    $$
+      dx = \begin{cases}
+        x_{t} ^ \prime - x_{t}, & \longleftrightarrow \beta < 0 \\
+        x_{t} - x_{t} ^ \prime, & \text{caso contrário}
+      \end{cases}
+    $$
+    \vspace{5mm}
+
+    No processo o $CET_{aa}$ é entendido como $h$ e suas iterações terão como
+    critério de parada se $f(h) < 1 \cdot 10 ^ {-8}\ \lor\ |dx| < 1 \cdot 10 ^ {-8}$
+    e ocorrerão da seguinte forma:
+    $$
+      dx_{i + 1} = dx_{i} \cdot 0,5 \rightarrow dx_{i + 1} = \frac{dx_{i}}{2}
+    $$
+    \vspace{0.1mm}
+    $$
+      h = rtb + dx_{i}\ \land\
+      f(h) = C + \sum\limits_{i = 1} ^ {k + 1} \frac{\alpha_{i}}{(1 + h) ^ \frac{d_{i}}{365}}
+    $$
+    \vspace{0.1mm}
+    $$
+      rtb = \begin{cases}
+        h,   & \longleftrightarrow f(h) <= 0 \\
+        rtb, & \text{caso contrário}
+      \end{cases}
+    $$
+    $$\therefore$$
+    \begin{center}
+      $
+        CET_{aa} = f(h)
+        \text{ em determinada etapa do processo de interações}
+      $
+    \end{center}
+  }
+
+  \subsection{Obtenção do valor do $CET_{am}$}{
+    Para a alegria de muitos, $CET_{am}$ é mais simples de ser achado:
+    \begin{equation}
+      CET_{am} = [(1 + CET_{aa}) ^ {(\frac{30}{365})}] - 1
+    \end{equation}
+  }
+
+  \subsection{Fator crítico de mudança}{
+    Ambos os cálculos podem tornar-se zerados, vide regra abaixo:
+    \begin{equation*}
+      CET_{aa} = 0 \longleftrightarrow CET_{aa} < 0
+    \end{equation*}
+    \begin{equation*}
+      CET_{am} = 0 \longleftrightarrow CET_{am} < 0
+    \end{equation*}
   }
  }
 \end{document}
