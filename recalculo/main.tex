@@ -8,7 +8,9 @@
 ]{hyperref}
 \usepackage{
   import,
+  xcolor,
   amssymb,
+  mdframed,
   amsfonts,
   fancyhdr,
   mathtools,
@@ -17,6 +19,12 @@
   titlesec,
   indentfirst
 }
+
+\newmdenv[
+  backgroundcolor = gray!10,
+  skipabove = \topsep,
+  skipbelow = \topsep,
+]{reminder}
 
 \import{./config/}{style.tex}
 \import{./config/}{format.tex}
@@ -100,6 +108,12 @@
     Essa etapa é responsável pelo cálculo do valor da parcela e do valor amortizado.
     Entretanto, para que isso seja possível, é necessário termos em mãos o valor
     do \textbf{fator de cálculo total}.
+
+    \subsubsection{Referência no código}{
+      \begin{reminder}
+        Arquivo: CalculaContrato.class.php (ln. 467)
+      \end{reminder}
+    }
 
     \subsubsection{Fator de cálculo}{
       O fator de cálculo é obtido através da soma dos fatores parcias ($f_{p_{i}}$)
@@ -190,6 +204,12 @@
   possível a obtenção deste valor, usamos como input o valor do da parcela
   anteriormente calculado.
 
+  \subsection{Referência no código}{
+    \begin{reminder}
+      Arquivo: CalculaContrato.class.php (ln. 528)
+    \end{reminder}
+  }
+
   \subsection{Cálculo do valor presente da parcela}{
     Num primeiro momento, é necessário que tenhamos o valor presente da parcela
     $(vpp_{i})$ referente ao prazo do conjunto de prazos.
@@ -254,6 +274,12 @@
   Fomos guiados até esse momento para que pudéssemos calcular o CET ao mês, isto
   é, custo efetivo total referente ao contrato. Entretanto, prepararemos alguns
   dados, pois são requisitos da operação. \label{subsec:hello}
+
+  \subsection{Referência no código}{
+    \begin{reminder}
+      Arquivo: CalculaContrato.class.php (ln. 603)
+    \end{reminder}
+  }
 
   \subsection{Cálculo do juros}{
     Para calcular o juros, executamos uma operação incremental que atualizará o
@@ -332,6 +358,12 @@
   Para que possamos definir o valor do valor limite da parcela é necessário calcularmos
   o valor incremental final.
 
+  \subsection{Referência no código}{
+    \begin{reminder}
+      Arquivo: CalculaContrato.class.php (ln. 293)
+    \end{reminder}
+  }
+
   \subsection{Cálculo valor incremental final}{
     O valor incremental também é entendido como o valor financiado com IOF pelo
     processo como é feito hoje. Dito isso, para o cálculo do valor incremental,
@@ -368,13 +400,19 @@
   operação e, no final, apresentaremos os atributos do contrato que sofrerão
   essas modificações.
 
+  \subsection{Referência no código}{
+    \begin{reminder}
+      Arquivo: RecalculoCessao.php (ln. 986)
+    \end{reminder}
+  }
+
   \subsection{Valor das prestações (valor da parcela)}{
     Em muitas ocasiões nessa documentação tratamos do valor da parcela, entretanto,
     a partir deste ponto, o sistema entenderá como prestação. Dito isso, essa etapa
     será responsável pela produção de um conjunto de prestações com dois elementos.
     Esse conjunto dependerá do tipo do aluno. Último ponto e não menos importante,
     nós entenderemos esse conjunto pela letra M e seus elementos como $\mu_{1}$
-    e $\mu_{2}$. Veja:
+    e $\mu_{2}$. $\mu_{1}$ será usado para a atualização do contrato. Veja:
 
     \subsubsection{Prestações para aluno novo sem contrato conjunto}{
       Cálculo do valor de adesão:
@@ -584,6 +622,12 @@
   Bem como procurar encontrar a razão pela qual o produto dessas operações parecem
   incongruentes, isto é, pode ser que pela não execução dos mesmos, tenhamos esse
   resultado.
+
+  \subsection{Referência no código}{
+    \begin{reminder}
+      Arquivo: CalculaContrato.class.php (ln. 377)
+    \end{reminder}
+  }
 
   \subsection{Cálculo dos valores CET ao mês e ao ano}{
     O processo de obtenção dos valores pode ser dividida em alguns passos, desde
