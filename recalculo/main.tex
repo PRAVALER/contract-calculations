@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage[subpreambles=true]{standalone}
+\usepackage[unicode]{hyperref}
 \usepackage{
   import,
   amssymb,
@@ -34,15 +35,15 @@
     \begin{equation}
       \taxaJuros
     \end{equation}
-    \vspace{0.1mm}
+    \begingroup
+    \renewcommand{\arraystretch}{1.5}
     \begin{center}
-      \begin{varwidth}{\textwidth}
-        \begin{enumerate}
-          \item{$t$\@: taxa de juros do contrato}
-          \item{$j$\@: taxa de juros mensal}
-        \end{enumerate}
-      \end{varwidth}
+      \begin{tabular}{l}
+        $t$: taxa de juros do contrato \\
+        $j$: taxa de juros mensal
+      \end{tabular}
     \end{center}
+    \endgroup
     \vspace{5mm}
 
     O conjunto de prazos que são a diferença, em dias, entre a data da concessão
@@ -50,15 +51,15 @@
     \begin{equation}
       \prazo
     \end{equation}
-    \vspace{0.1mm}
+    \begingroup
+    \renewcommand{\arraystretch}{1.5}
     \begin{center}
-      \begin{varwidth}{\textwidth}
-        \begin{enumerate}
-          \item{$p$\@: prazo elemento de P, com p $\in$ $\mathbb{N_{+}^*}$}
-          \item{$k$\@: a quantidade de parcelas, com k $\in$ $\mathbb{N_{+}^*}$}
-        \end{enumerate}
-      \end{varwidth}
+      \begin{tabular}{l}
+        $p$: prazo elemento de P, com p $\in$ $\mathbb{N_{+}^*}$ \\
+        $k$: a quantidade de parcelas, com k $\in$ $\mathbb{N_{+}^*}$
+      \end{tabular}
     \end{center}
+    \endgroup
     \vspace{5mm}
 
     O valor inicial da parcela entendido, essencialmente, como a razão entre o
@@ -66,16 +67,16 @@
     \begin{equation}
       \valorInicial
     \end{equation}
-    \vspace{0.1mm}
+    \begingroup
+    \renewcommand{\arraystretch}{1.5}
     \begin{center}
-      \begin{varwidth}{\textwidth}
-        \begin{enumerate}
-          \item{$vi$\@: valor inicial da parcela}
-          \item{$vf$\@: valor financiado}
-          \item{$C$\@: uma constante não definida tida como 0,01}
-        \end{enumerate}
-      \end{varwidth}
+      \begin{tabular}{l}
+        $vi$: valor inicial da parcela \\
+        $vf$: valor financiado         \\
+        $C$: uma constante não definida tida como 0,01
+      \end{tabular}
     \end{center}
+    \endgroup
   }
  }
 
@@ -105,18 +106,18 @@
       \end{equation}
       \begin{equation*}\therefore\end{equation*}
       \begin{equation}\fatorTotal\end{equation}
-      \vspace{0.1mm}
+      \begingroup
+      \renewcommand{\arraystretch}{1.5}
       \begin{center}
-        \begin{varwidth}{\textwidth}
-          \begin{enumerate}
-            \item{$f_{p_{i}}$\@: fator parcial do cálculo}
-            \item{$p_{i}$: um elemento qualquer do conjunto de prazos}
-            \item{$f_{t}$\@: fator de cálculo total}
-            \item{$f_{p_{i}}$\@: fator parcial do cálculo}
-            \item{$p_{i}$: um elemento qualquer do conjunto de prazos}
-          \end{enumerate}
-        \end{varwidth}
+        \begin{tabular}{l}
+          $f_{p_{i}}$: fator parcial do cálculo               \\
+          $p_{i}$: um elemento qualquer do conjunto de prazos \\
+          $f_{t}$: fator de cálculo total                     \\
+          $f_{p_{i}}$: fator parcial do cálculo               \\
+          $p_{i}$: um elemento qualquer do conjunto de prazos
+        \end{tabular}
       \end{center}
+      \endgroup
     }
 
     \subsubsection{Cálculo da parcela}{
@@ -124,14 +125,14 @@
       \begin{equation} \label{eq:parcela}
         vp = \frac{vf}{f_{t}} \rightarrow \parcela
       \end{equation}
-      \vspace{0.1mm}
+      \begingroup
+      \renewcommand{\arraystretch}{1.5}
       \begin{center}
-        \begin{varwidth}{\textwidth}
-          \begin{enumerate}
-            \item{$vp$\@: valor da parcela}
-          \end{enumerate}
-        \end{varwidth}
+        \begin{tabular}{l}
+          $vp$: valor da parcela
+        \end{tabular}
       \end{center}
+      \endgroup
     }
 
     \subsubsection{Cálculo do valor amortizado}{
@@ -140,17 +141,17 @@
       \begin{equation}
         \juros
       \end{equation}
-      \vspace{0.1mm}
+      \begingroup
+      \renewcommand{\arraystretch}{1.5}
       \begin{center}
-        \begin{varwidth}{\textwidth}
-          \begin{enumerate}
-            \item{$j_{i}$\@: juros referente a um prazo}
-            \item{$s_{i}$\@: saldo devedor referente a um prazo}
-            \item{$p_{i} ^ \prime$\@: prazo anterior ao prazo atual}
-            \item{$i$\@: número variando \{1 $\ldots$ k\}}
-          \end{enumerate}
-        \end{varwidth}
+        \begin{tabular}{l}
+          $j_{i}$: juros referente a um prazo             \\
+          $s_{i}$: saldo devedor referente a um prazo     \\
+          $p_{i} ^ \prime$: prazo anterior ao prazo atual \\
+          $i$: número variando \{1 $\ldots$ k\}
+        \end{tabular}
       \end{center}
+      \endgroup
       \vspace{5mm}
 
       Esse cálculo nos possibilita calcular o valor amortizado total.
@@ -159,15 +160,15 @@
       \end{equation}
       \begin{equation*}\therefore\end{equation*}
       \begin{equation}\amortizadoSimplificado\end{equation}
-      \vspace{0.1mm}
+      \begingroup
+      \renewcommand{\arraystretch}{1.5}
       \begin{center}
-        \begin{varwidth}{\textwidth}
-          \begin{enumerate}
-            \item{$j_{i}$\@: juros referente a um prazo}
-            \item{$a_{t}$\@: amortizado total}
-          \end{enumerate}
-        \end{varwidth}
+        \begin{tabular}{l}
+          $j_{i}$: juros referente a um prazo \\
+          $a_{t}$: amortizado total
+        \end{tabular}
       \end{center}
+      \endgroup
     }
   }
  }
@@ -183,21 +184,23 @@
     \begin{equation}
       \valorPresenteParcela
     \end{equation}
-    \vspace{0.1mm}
+    \begingroup
+    \renewcommand{\arraystretch}{1.5}
     \begin{center}
-      \begin{varwidth}{\textwidth}
-        \begin{enumerate}
-          \item{$vpp_{i}$\@: juros referente a um prazo}
-          \item{$y$\@: pode ser o prazo ou uma constante}
-                \subitem $$
-                  y = \begin{cases}
-                    p_{i}, & \text{se houver aplicação de IOF no contrato} \\
-                    365,   & \text{caso contrário}
-                  \end{cases}
-                $$
-        \end{enumerate}
-      \end{varwidth}
+      \begin{tabular}{l}
+        $vpp_{i}$: juros referente a um prazo  \\
+        $y$: pode ser o prazo ou uma constante \\
+        $
+          \subitem $$
+            y = \begin{cases}
+              p_{i}, & \text{se houver aplicação de IOF no contrato} \\
+              365,   & \text{caso contrário}
+            \end{cases}
+          $$
+        $
+      \end{tabular}
     \end{center}
+    \endgroup
   }
 
   \subsection{Cálculo do valor presente da parcela}{
@@ -206,15 +209,15 @@
     \begin{equation}
       \iofFinalParcial
     \end{equation}
-    \vspace{0.1mm}
+    \begingroup
+    \renewcommand{\arraystretch}{1.5}
     \begin{center}
-      \begin{varwidth}{\textwidth}
-        \begin{enumerate}
-          \item{$iof_{a}$\@: IOF adicional, uma contante fixa no valor de 0.38}
-          \item{$iof_{d}$\@: IOF diário, uma contante fixa no valor de 0.0082}
-        \end{enumerate}
-      \end{varwidth}
+      \begin{tabular}{l}
+        $iof_{a}$: IOF adicional, uma contante fixa no valor de 0.38 \\
+        $iof_{d}$: IOF diário, uma contante fixa no valor de 0.0082
+      \end{tabular}
     \end{center}
+    \endgroup
     \vspace{5mm}
 
     Importante notar que tanto $iof_{a}$ como $iof_{d}$ podem ser zerados, caso
@@ -233,10 +236,10 @@
   }
  }
 
-\section{Cálculo do $CET_{am}$ parcial}{
+\section{Cálculo do CET ao mês parcial}{
   Fomos guiados até esse momento para que pudéssemos calcular o CET ao mês, isto
   é, custo efetivo total referente ao contrato. Entretanto, prepararemos alguns
-  dados, pois são requisitos da operação.
+  dados, pois são requisitos da operação. \label{subsec:hello}
 
   \subsection{Cálculo do juros}{
     Para calcular o juros, executamos uma operação incremental que atualizará o
@@ -244,9 +247,12 @@
     que possui como objetivo atingir o valor financiado. Logo, suponha a função
     $g(pa)$ que retorna o valor do parcial após k iterações. A função $g(pa)$
     será executada um número indeterminado de vezes e, conforme dito anteriormente,
-    a taxa de juros sofrerá alterações. Ou seja, ela dependerá do limite de $g(pa)$
-    quando o parcial ($pa$) tende ao valor financiado ($vf$):
-    \begin{equation}
+    a taxa de juros sofrerá alterações. Ou seja, ela dependerá do
+    limite de $g(pa)$ quando o parcial ($pa$) tende
+    ao valor financiado ($vf$):
+    \label{subsec:Alice}
+
+    \begin{equation} \label{eq:limitVF}
       \limitVF
     \end{equation}
 
@@ -254,31 +260,31 @@
     \begin{equation}
       \parcial
     \end{equation}
-    \vspace{0.1mm}
+    \begingroup
+    \renewcommand{\arraystretch}{1.5}
     \begin{center}
-      \begin{varwidth}{\textwidth}
-        \begin{enumerate}
-          \item{$pa$\@: parcial}
-          \item{$t_{j}$\@: juros calculado}
-          \item{$f(pa)$\@: função parte do cálculo do parcial}
-        \end{enumerate}
-      \end{varwidth}
+      \begin{tabular}{l}
+        $pa$: parcial            \\
+        $t_{j}$: juros calculado \\
+        $f(pa)$: função parte do cálculo do parcial
+      \end{tabular}
     \end{center}
+    \endgroup
     \vspace{5mm}
 
     Para cada iteração de $g(pa)$ o juros $t_{j + 1}$ é obtido da seguinte forma:
     \begin{equation}
       \cetParcial
     \end{equation}
-    \vspace{0.1mm}
+    \begingroup
+    \renewcommand{\arraystretch}{1.5}
     \begin{center}
-      \begin{varwidth}{\textwidth}
-        \begin{enumerate}
-          \item{$t_{j + 1}$\@: o próximo valor do juros}
-          \item{$I$\@: incremento pré definido no valor de 0,00001}
-        \end{enumerate}
-      \end{varwidth}
+      \begin{tabular}{l}
+        $t_{j + 1}$: o próximo valor do juros \\
+        $I$: incremento pré definido no valor de 0,00001
+      \end{tabular}
     \end{center}
+    \endgroup
     \vspace{5mm}
 
     Logo para obtermos o juros total, efetuamos a soma dos juros parciais:
@@ -319,15 +325,15 @@
     \begin{equation}
       \parcelaPrime
     \end{equation}
-    \vspace{0.1mm}
+    \begingroup
+    \renewcommand{\arraystretch}{1.5}
     \begin{center}
-      \begin{varwidth}{\textwidth}
-        \begin{enumerate}
-          \item{$\mathcal{E}$\@: valor financiado com IOF}
-          \item{$vp ^ \prime$\@: valor da parcela}
-        \end{enumerate}
-      \end{varwidth}
+      \begin{tabular}{l}
+        $\mathcal{E}$: valor financiado com IOF \\
+        $vp ^ \prime$: valor da parcela
+      \end{tabular}
     \end{center}
+    \endgroup
   }
 
   \subsection{Cálculo da parcela final}{
@@ -357,16 +363,16 @@
       \begin{equation}
         v_{a} = \frac{m_{d} \cdot t_{a}}{100}
       \end{equation}
-      \vspace{0.1mm}
+      \begingroup
+      \renewcommand{\arraystretch}{1.5}
       \begin{center}
-        \begin{varwidth}{\textwidth}
-          \begin{enumerate}
-            \item{$v_{a}$\@: valor da adesão do aluno}
-            \item{$t_{a}$\@: taxa de adesão do aluno}
-            \item{$m_{d}$\@: mensalidade calculada na etapa de contratação}
-          \end{enumerate}
-        \end{varwidth}
+        \begin{tabular}{l}
+          $v_{a}$@: valor da adesão do aluno \\
+          $t_{a}$@: taxa de adesão do aluno  \\
+          $m_{d}$@: mensalidade calculada na etapa de contratação
+        \end{tabular}
       \end{center}
+      \endgroup
       \vspace{5mm}
 
       Cálculo da primeira prestação:
@@ -377,30 +383,30 @@
           t_{p}, & \text{caso contrário}
         \end{cases}
       \end{equation}
-      \vspace{0.1mm}
+      \begingroup
+      \renewcommand{\arraystretch}{1.5}
       \begin{center}
-        \begin{varwidth}{\textwidth}
-          \begin{enumerate}
-            \item{$\mu_{1}$\@: cálculo da primeira prestações}
-            \item{$L$\@: tarifa da parcela}
-            \item{$t_{adm}$\@: taxa de administração}
-          \end{enumerate}
-        \end{varwidth}
+        \begin{tabular}{l}
+          $\mu_{1}$: cálculo da primeira prestações \\
+          $L$: tarifa da parcela                    \\
+          $t_{adm}$: taxa de administração
+        \end{tabular}
       \end{center}
+      \endgroup
       \vspace{5mm}
 
       Cálculo da segunda prestação:
       \begin{equation}
         \mu_{2} = vp + \frac{m_{d}}{100} + v_{a} + L
       \end{equation}
-      \vspace{0.1mm}
+      \begingroup
+      \renewcommand{\arraystretch}{1.5}
       \begin{center}
-        \begin{varwidth}{\textwidth}
-          \begin{enumerate}
-            \item{$\mu_{2}$\@: cálculo da primeira prestações}
-          \end{enumerate}
-        \end{varwidth}
+        \begin{tabular}{l}
+          $\mu_{2}$: cálculo da primeira prestações
+        \end{tabular}
       \end{center}
+      \endgroup
       \vspace{5mm}
     }
 
@@ -413,30 +419,30 @@
           t_{p}, & \text{caso contrário}
         \end{cases}
       \end{equation}
-      \vspace{0.1mm}
+      \begingroup
+      \renewcommand{\arraystretch}{1.5}
       \begin{center}
-        \begin{varwidth}{\textwidth}
-          \begin{enumerate}
-            \item{$\mu_{1}$\@: cálculo da primeira prestações}
-            \item{$L$\@: tarifa da parcela}
-            \item{$t_{adm}$\@: taxa de administração}
-          \end{enumerate}
-        \end{varwidth}
+        \begin{tabular}{l}
+          $\mu_{1}$: cálculo da primeira prestações \\
+          $L$: tarifa da parcela                    \\
+          $t_{adm}$: taxa de administração
+        \end{tabular}
       \end{center}
+      \endgroup
       \vspace{5mm}
 
       Cálculo da segunda prestação:
       \begin{equation}
         \mu_{2} = vp + \frac{m_{d}}{100} + v_{a} + L
       \end{equation}
-      \vspace{0.1mm}
+      \begingroup
+      \renewcommand{\arraystretch}{1.5}
       \begin{center}
-        \begin{varwidth}{\textwidth}
-          \begin{enumerate}
-            \item{$\mu_{2}$\@: cálculo da primeira prestações}
-          \end{enumerate}
-        \end{varwidth}
+        \begin{tabular}{l}
+          $\mu_{2}$: cálculo da primeira prestações
+        \end{tabular}
       \end{center}
+      \endgroup
       \vspace{5mm}
     }
 
@@ -446,6 +452,46 @@
         \mu_{1} = \mu_{2} = vp + \frac{m_{d} \cdot t_{adm}}{100}
       \end{equation}
       \vspace{5mm}
+    }
+  }
+
+  \subsection{Cálculo do CET ao mês}{
+    Depois de inúmeras operações referente ao $CET_{am}$, chegamos ao cálculo que,
+    de fato, descreve seu valor. Assim como nos cálculos anteriores, dividiremos
+    esse processo em etapas.
+
+    \subsubsection{Preparação conceitual do processo}{
+      Ao longo dos cálculos, algumas variáveis e/ou conjuntos serão definidos.
+      Conjunto de "passos", isto é, componente responsável pela atualização do
+      valor do juros. Entenda $S$ como o conjunto e $s_{j ^ {\prime \prime}}$
+      como um elemento desse conjunto.
+      \begin{equation*}
+        S = \{s_{1}, \cdots, s_{n}\} \text{, onde } j ^ {\prime \prime} = \{1, \cdots, n\}
+      \end{equation*}
+
+      Conjunto dos "parciais" $PA$, com $pa_{j ^ \prime}$ como elemento:
+      \begin{equation*}
+        PA = \{pa_{1}, \cdots, pa_{l}\} \text{, onde } j ^ \prime = \{1, \cdots, l\}
+      \end{equation*}
+
+      Conjunto dos juros $T$, com $t_{j}$ como elemento:
+      \begin{equation*}
+        T = \{t_{1}, \cdots, t_{m}\} \text{, onde } j = \{1, \cdots, m\}
+      \end{equation*}
+    }
+
+    \subsubsection{Cálculo inicial do parcial}{
+      O cálculo do parcial inicial seguirá a definição vista na fórmula (\ref{eq:limitVF})
+      \ref{subsec:Alice}
+
+    }
+
+    \subsubsection{Cálculo do juros}{
+      Iniciaremos uma série de iterações com o objetivo do cálculo do juros e esse
+      juros é dependente do parcial tendendo ao valor financiado.
+      \begin{equation}
+        s
+      \end{equation}
     }
   }
  }
@@ -460,7 +506,7 @@
   incongruentes, isto é, pode ser que pela não execução dos mesmos, tenhamos esse
   resultado.
 
-  \subsection{Cálculo dos valores $CETam$ e $CETaa$}{
+  \subsection{Cálculo dos valores CET ao mês e ao ano}{
     O processo de obtenção dos valores pode ser dividida em alguns passos, desde
     a preparação dos dados até a execução dos algorítimos.
 
@@ -522,7 +568,7 @@
       \end{itemize}
     }
 
-    \subsubsection{Encontrando as taxas $x_{t}$ e $x_{t} ^ \prime$}{
+    \subsubsection{Encontrando as taxas totais}{
       A partir desse ponto iniciaremos uma série de interações onde os critérios de
       parada serão:
       \begin{itemize}
@@ -565,7 +611,7 @@
       \end{equation}
     }
 
-    \subsubsection{Obtenção do valor do $CET_{aa}$}{
+    \subsubsection{Obtenção do valor do CET ao ano}{
       Considere a configuração de algumas variáveis:
       \begin{equation}
         \beta = C + \sum\limits_{i = 1} ^ {k + 1} \frac{\alpha_{i}}{(1 + x_{t}) ^ \frac{d_{i}}{365}}
@@ -612,7 +658,7 @@
       \end{center}
     }
 
-    \subsubsection{Obtenção do valor do $CET_{am}$}{
+    \subsubsection{Obtenção do valor do CET ao mês}{
       Para a alegria de muitos, $CET_{am}$ é mais simples de ser achado:
       \begin{equation}
         CET_{am} = [(1 + CET_{aa}) ^ {(\frac{30}{365})}] - 1
