@@ -4,4 +4,6 @@
 **/*.log
 **/*.pdf
 **/*.sta
+**/*.out
+**/*.toc
 **/*.synctex.gz
