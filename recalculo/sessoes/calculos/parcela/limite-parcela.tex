@@ -1,0 +1,50 @@
+\section{Cálculo valor limite da parcela}{
+  Esse é o ponto das operações de cálculo em que é decidido um dos possíveis
+  valores finais da parcela. Será definido que a parcela assumirá o valor encontrado
+  que foi descrito no item (\ref{eq:parcela}) ou o valor limite da parcela ($vl$)
+  e podemos escrever da seguinte maneira:
+  $$
+    vp = \begin{cases}
+      vl, & vp > vl  \\
+      vp, & vp <= vl
+    \end{cases}
+  $$
+
+  Para que possamos definir o valor do valor limite da parcela é necessário calcularmos
+  o valor incremental final.
+
+  \subsection{Referência no código}{
+    \begin{reminder}
+      Arquivo: CalculaContrato.class.php (ln. 293)
+    \end{reminder}
+  }
+
+  \subsection{Cálculo valor incremental final}{
+    O valor incremental também é entendido como o valor financiado com IOF pelo
+    processo como é feito hoje. Dito isso, para o cálculo do valor incremental,
+    retornamos ao cálculo do valor da parcela (\ref{eq:parcela}), mas dessa vez
+    tendo o valor financiado com IOF (\ref{eq:vfIof}) como input. Logo, teremos
+    o valor incremental será:
+    \begin{equation}
+      \parcelaPrime
+    \end{equation}
+    \begingroup
+    \renewcommand{\arraystretch}{1.5}
+    \begin{center}
+      \begin{tabular}{l}
+        $\mathcal{E}$: valor financiado com IOF \\
+        $vp ^ \prime$: valor da parcela
+      \end{tabular}
+    \end{center}
+    \endgroup
+  }
+
+  \subsection{Cálculo da parcela final}{
+    O valor limite da parcela $vl$ é obtido através da seguinte equação:
+    \begin{equation}
+      \valorLimiteParcelaSimple
+    \end{equation}
+  }
+
+  \pagebreak
+ }

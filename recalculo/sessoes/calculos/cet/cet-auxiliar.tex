@@ -1,0 +1,72 @@
+\section{Cálculo do CET ao mês parcial}{
+  Fomos guiados até esse momento para que pudéssemos calcular o CET ao mês, isto
+  é, custo efetivo total referente ao contrato. Entretanto, prepararemos alguns
+  dados, pois são requisitos da operação. \label{subsec:hello}
+
+  \subsection{Referência no código}{
+    \begin{reminder}
+      Arquivo: CalculaContrato.class.php (ln. 603)
+    \end{reminder}
+  }
+
+  \subsection{Cálculo do juros}{
+    Para calcular o juros, executamos uma operação incremental que atualizará o
+    juros aos poucos. O juros será influenciado por uma variável chamada parcial,
+    que possui como objetivo atingir o valor financiado. Logo, suponha a função
+    $g(pa)$ que retorna o valor do parcial após k iterações. A função $g(pa)$
+    será executada um número indeterminado de vezes e, conforme dito anteriormente,
+    a taxa de juros sofrerá alterações. Ou seja, ela dependerá do
+    limite de $g(pa)$ quando o parcial ($pa$) tende
+    ao valor financiado ($vf$):
+    \label{subsec:parcial}
+
+    \begin{equation} \label{eq:limitVF}
+      \limitVF
+    \end{equation}
+
+    onde $f(pa)$:
+    \begin{equation}
+      \parcial
+    \end{equation}
+    \begingroup
+    \renewcommand{\arraystretch}{1.5}
+    \begin{center}
+      \begin{tabular}{l}
+        $pa$: parcial            \\
+        $t_{j}$: juros calculado \\
+        $f(pa)$: função parte do cálculo do parcial
+      \end{tabular}
+    \end{center}
+    \endgroup
+    \vspace{5mm}
+
+    Para cada iteração de $g(pa)$ o juros $t_{j + 1}$ é obtido da seguinte forma:
+    \begin{equation}
+      \cetParcial
+    \end{equation}
+    \begingroup
+    \renewcommand{\arraystretch}{1.5}
+    \begin{center}
+      \begin{tabular}{l}
+        $t_{j + 1}$: o próximo valor do juros \\
+        $I$: incremento pré definido no valor de 0,00001
+      \end{tabular}
+    \end{center}
+    \endgroup
+    \vspace{5mm}
+
+    Logo para obtermos o juros total, efetuamos a soma dos juros parciais:
+    \begin{equation}
+      t ^ \prime = \sum\limits_{j = 1} ^ {n} t_{j}
+    \end{equation}
+  }
+
+  \subsection{Consolidação do CET}{
+    A partir desse ponto é possível calcularmos o valor do CET:
+    \begin{equation}
+      CET_{am} = t ^ \prime \cdot 100
+    \end{equation}
+  }
+
+  \pagebreak
+ }

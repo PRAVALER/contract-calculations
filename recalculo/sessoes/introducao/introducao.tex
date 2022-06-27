@@ -1,0 +1,56 @@
+\section{Introdução}{
+  O recálculo é um processo que permite ao cliente ajustar o valor do seu crédito
+  de acordo com as suas necessidades. No caso, ajustar o valor das parcelas com
+  base na data de concessão.
+
+  \subsection{Preparação das informações}{
+    Os cálculos iniciam com a preparação de algumas informações, como:
+    \begin{equation}
+      \taxaJuros
+    \end{equation}
+    \begingroup
+    \renewcommand{\arraystretch}{1.5}
+    \begin{center}
+      \begin{tabular}{l}
+        $t$: taxa de juros do contrato \\
+        $j$: taxa de juros mensal
+      \end{tabular}
+    \end{center}
+    \endgroup
+    \vspace{5mm}
+
+    O conjunto de prazos que são a diferença, em dias, entre a data da concessão
+    e a data de vencimento da parcela, predefinida na etapa de formalização.
+    \begin{equation}
+      \prazo
+    \end{equation}
+    \begingroup
+    \renewcommand{\arraystretch}{1.5}
+    \begin{center}
+      \begin{tabular}{l}
+        $p$: prazo elemento de P, com p $\in$ $\mathbb{N_{+}^*}$ \\
+        $k$: a quantidade de parcelas, com k $\in$ $\mathbb{N_{+}^*}$
+      \end{tabular}
+    \end{center}
+    \endgroup
+    \vspace{5mm}
+
+    O valor inicial da parcela entendido, essencialmente, como a razão entre o
+    valor financiado e a quantidade de parcelas, menos um valor fixo.
+    \begin{equation}
+      \valorInicial
+    \end{equation}
+    \begingroup
+    \renewcommand{\arraystretch}{1.5}
+    \begin{center}
+      \begin{tabular}{l}
+        $vi$: valor inicial da parcela \\
+        $vf$: valor financiado         \\
+        $C$: uma constante não definida tida como 0,01
+      \end{tabular}
+    \end{center}
+    \endgroup
+  }
+
+  \pagebreak
+ }

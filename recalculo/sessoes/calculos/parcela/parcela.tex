@@ -1,0 +1,100 @@
+\section{Cálculo da parcela}{
+  O cálculo passa por uma série de repetições dentro de outras repetições.
+  Muitas dessas repetições têm por objetivo, por exemplo, determinar a taxa de
+  juros, através de uma simulação de cálculos. Essas simulações propõe atingir um
+  determinado valor, funcionando como um critério de parada.
+
+  \subsection{Cálculo do pagamento}{
+    Essa etapa é responsável pelo cálculo do valor da parcela e do valor amortizado.
+    Entretanto, para que isso seja possível, é necessário termos em mãos o valor
+    do \textbf{fator de cálculo total}.
+
+    \subsubsection{Referência no código}{
+      \begin{reminder}
+        Arquivo: CalculaContrato.class.php (ln. 467)
+      \end{reminder}
+    }
+
+    \subsubsection{Fator de cálculo}{
+      O fator de cálculo é obtido através da soma dos fatores parcias ($f_{p_{i}}$)
+      que são obtidos através da lista de prazos ($P$) previamente definida. Esse
+      procedimento nos fornecerá um conjunto de fatores parciais possibilitando
+      o cálculo de fator de cálculo total através da soma dos mesmos. Portanto,
+      assuma $F$ como o conjunto desses fatores parciais.
+      \begin{equation*}
+        F = \{f_{p_{1}}, \ldots, f_{p_{k}}\}
+      \end{equation*}
+
+      \begin{equation}
+        \fatorParcial \rightarrow f_{t} = \sum\limits_{i = 1} ^ {k} f_{p_{i}}
+      \end{equation}
+      \begin{equation*}\therefore\end{equation*}
+      \begin{equation}\fatorTotal\end{equation}
+      \begingroup
+      \renewcommand{\arraystretch}{1.5}
+      \begin{center}
+        \begin{tabular}{l}
+          $f_{p_{i}}$: fator parcial do cálculo               \\
+          $p_{i}$: um elemento qualquer do conjunto de prazos \\
+          $f_{t}$: fator de cálculo total                     \\
+          $f_{p_{i}}$: fator parcial do cálculo               \\
+          $p_{i}$: um elemento qualquer do conjunto de prazos
+        \end{tabular}
+      \end{center}
+      \endgroup
+    }
+
+    \subsubsection{Cálculo da parcela}{
+      Neste momento, somos capazes de efetuar o cálculo do valor da parcela.
+      \begin{equation} \label{eq:parcela}
+        vp = \frac{vf}{f_{t}} \rightarrow \parcela
+      \end{equation}
+      \begingroup
+      \renewcommand{\arraystretch}{1.5}
+      \begin{center}
+        \begin{tabular}{l}
+          $vp$: valor da parcela
+        \end{tabular}
+      \end{center}
+      \endgroup
+    }
+
+    \subsubsection{Cálculo do valor amortizado}{
+      Outro calculo realizado pelo recálculo é o cálculo do valor amortizado.
+      Para isso, precisamos calcular o juros referente à cada prazo.
+      \begin{equation}
+        \juros
+      \end{equation}
+      \begingroup
+      \renewcommand{\arraystretch}{1.5}
+      \begin{center}
+        \begin{tabular}{l}
+          $j_{i}$: juros referente a um prazo             \\
+          $s_{i}$: saldo devedor referente a um prazo     \\
+          $p_{i} ^ \prime$: prazo anterior ao prazo atual \\
+          $i$: número variando \{1 $\ldots$ k\}
+        \end{tabular}
+      \end{center}
+      \endgroup
+      \vspace{5mm}
+
+      Esse cálculo nos possibilita calcular o valor amortizado total.
+      \begin{equation}
+        a_{i} = vp - j_{i} \rightarrow \amortizado
+      \end{equation}
+      \begin{equation*}\therefore\end{equation*}
+      \begin{equation}\amortizadoSimplificado\end{equation}
+      \begingroup
+      \renewcommand{\arraystretch}{1.5}
+      \begin{center}
+        \begin{tabular}{l}
+          $j_{i}$: juros referente a um prazo \\
+          $a_{t}$: amortizado total
+        \end{tabular}
+      \end{center}
+      \endgroup
+    }
+  }
+
+  \pagebreak
+ }

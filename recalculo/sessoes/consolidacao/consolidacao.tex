@@ -1,0 +1,218 @@
+\section{Consolidação e atualização dos contratos}{
+  A partir de agora é proposto a obtenção dos valores finais que atualizarão os
+  contratos de uma cessão. Para isso, abaixo, descreveremos uma coletânea de
+  operação e, no final, apresentaremos os atributos do contrato que sofrerão
+  essas modificações.
+
+  \subsection{Referência no código}{
+    \begin{reminder}
+      Arquivo: RecalculoCessao.php (ln. 986)
+    \end{reminder}
+  }
+
+  \subsection{Valor das prestações (valor da parcela)}{
+    Em muitas ocasiões nessa documentação tratamos do valor da parcela, entretanto,
+    a partir deste ponto, o sistema entenderá como prestação. Dito isso, essa etapa
+    será responsável pela produção de um conjunto de prestações com dois elementos.
+    Esse conjunto dependerá do tipo do aluno. Último ponto e não menos importante,
+    nós entenderemos esse conjunto pela letra M e seus elementos como $\mu_{1}$
+    e $\mu_{2}$. $\mu_{1}$ será usado para a atualização do contrato. Veja:
+
+    \subsubsection{Prestações para aluno novo sem contrato conjunto}{
+      Cálculo do valor de adesão:
+      \begin{equation}
+        v_{a} = \frac{m_{d} \cdot t_{a}}{100}
+      \end{equation}
+      \begingroup
+      \renewcommand{\arraystretch}{1.5}
+      \begin{center}
+        \begin{tabular}{l}
+          $v_{a}$: valor da adesão do aluno \\
+          $t_{a}$: taxa de adesão do aluno  \\
+          $m_{d}$: mensalidade calculada na etapa de contratação
+        \end{tabular}
+      \end{center}
+      \endgroup
+      \vspace{5mm}
+
+      Cálculo da primeira prestação:
+      \begin{equation}
+        \mu_{1} = vp + \frac{m_{d} \cdot t_{adm}}{100} + v_{a} + L \text{, onde }
+        L = \begin{cases}
+          0,     & \text{isento de tarifa} \\
+          t_{p}, & \text{caso contrário}
+        \end{cases}
+      \end{equation}
+      \begingroup
+      \renewcommand{\arraystretch}{1.5}
+      \begin{center}
+        \begin{tabular}{l}
+          $\mu_{1}$: cálculo da primeira prestações \\
+          $L$: tarifa da parcela                    \\
+          $t_{adm}$: taxa de administração
+        \end{tabular}
+      \end{center}
+      \endgroup
+      \vspace{5mm}
+
+      Cálculo da segunda prestação:
+      \begin{equation}
+        \mu_{2} = vp + \frac{m_{d}}{100} + v_{a} + L
+      \end{equation}
+      \begingroup
+      \renewcommand{\arraystretch}{1.5}
+      \begin{center}
+        \begin{tabular}{l}
+          $\mu_{2}$: cálculo da primeira prestações
+        \end{tabular}
+      \end{center}
+      \endgroup
+      \vspace{5mm}
+    }
+
+    \subsubsection{Prestações para aluno novo com contrato conjunto}{
+      Cálculo da primeira prestação:
+      \begin{equation}
+        \mu_{1} = vp + \frac{m_{d} \cdot t_{adm}}{100} + L \text{, onde }
+        L = \begin{cases}
+          0,     & \text{isento de tarifa} \\
+          t_{p}, & \text{caso contrário}
+        \end{cases}
+      \end{equation}
+      \begingroup
+      \renewcommand{\arraystretch}{1.5}
+      \begin{center}
+        \begin{tabular}{l}
+          $\mu_{1}$: cálculo da primeira prestações \\
+          $L$: tarifa da parcela                    \\
+          $t_{adm}$: taxa de administração
+        \end{tabular}
+      \end{center}
+      \endgroup
+      \vspace{5mm}
+
+      Cálculo da segunda prestação:
+      \begin{equation}
+        \mu_{2} = vp + \frac{m_{d}}{100} + v_{a} + L
+      \end{equation}
+      \begingroup
+      \renewcommand{\arraystretch}{1.5}
+      \begin{center}
+        \begin{tabular}{l}
+          $\mu_{2}$: cálculo da primeira prestações
+        \end{tabular}
+      \end{center}
+      \endgroup
+      \vspace{5mm}
+    }
+
+    \subsubsection{Prestações para aluno renovação}{
+      Cálculo da primeira e segunda prestações:
+      \begin{equation}
+        \mu_{1} = \mu_{2} = vp + \frac{m_{d} \cdot t_{adm}}{100}
+      \end{equation}
+      \vspace{5mm}
+    }
+  }
+
+  \subsection{Cálculo do CET ao mês}{
+    Depois de inúmeras operações referente ao $CET_{am}$, chegamos ao cálculo que,
+    de fato, descreve seu valor. Assim como nos cálculos anteriores, dividiremos
+    esse processo em etapas.
+
+    \subsubsection{Preparação conceitual do processo}{
+      Ao longo dos cálculos, algumas variáveis e/ou conjuntos serão definidos.
+      Conjunto de "passos", isto é, componente responsável pela atualização do
+      valor do juros. Entenda $S$ como o conjunto e $s_{j ^ {\prime \prime}}$
+      como um elemento desse conjunto.
+      \begin{equation*}
+        S = \{s_{1}, \cdots, s_{n}\} \text{, onde } j ^ {\prime \prime} = \{1, \cdots, n\}
+      \end{equation*}
+
+      Conjunto dos "parciais" $PA$, com $pa_{j}$ como elemento:
+      \begin{equation*}
+        PA = \{pa_{1}, \cdots, pa_{l}\} \text{, onde } j = \{1, \cdots, l\}
+      \end{equation*}
+
+      Conjunto dos juros $T$, com $t_{j ^ \prime}$ como elemento:
+      \begin{equation*}
+        T = \{t_{1}, \cdots, t_{m}\} \text{, onde } j ^ \prime = \{1, \cdots, m\}
+      \end{equation*}
+    }
+
+    \subsubsection{Cálculo inicial do parcial}{
+      O cálculo do parcial inicial seguirá a definição vista na sessão \ref{subsec:parcial}.
+      Embora a definição de $g(pa)$ continue a mesma, sinalizaremos uma pequena
+      mudança em $f(pa)$:
+      \begin{equation}
+        f(pa) = pa + \Bigg[\frac{y}{(1 + t_{j ^ \prime}) ^ {(\frac{p_{i}}{30})}}\Bigg] \text{, com }
+        y = \begin{cases}
+          \mu_{1}, & i = 1 \lor \nexists\mu_{2} \\
+          \mu_{2}, & \text{caso contrário}
+        \end{cases}
+      \end{equation}
+    }
+
+    \subsubsection{Cálculo do juros}{
+      Iniciaremos uma série de iterações com o objetivo do cálculo do juros e esse
+      juros é dependente do parcial tendendo ao valor financiado. O critério de
+      parada será $pa_{t,j} - vf > \gamma$, com $\gamma$ sendo o erro máximo igual
+      a 0,001 centavos.
+      \begin{itemize}
+        \item{Identificação de $u$ que é entendido como "dirUp" no sistema}
+              \subitem
+              \begin{equation}
+                u = \begin{cases}
+                  v, & pa_{t,j} > 0\ \land\ u = f \\
+                  f, & pa_{t,j} < 0\ \land\ u = v
+                \end{cases}
+              \end{equation}
+        \item{Identificação de $s$ que é entendido como "passo" no sistema}
+              \subitem
+              \begin{equation}
+                s_{j ^ {\prime \prime} + 1} = \frac{s_{j ^ {\prime \prime}}}{2}
+                \longleftrightarrow
+                (pa_{t,j} > 0\ \land\ u = f)\ \lor\
+                (pa_{t,j} < 0\ \land\ u = v)
+              \end{equation}
+        \item{Cálculo do juros ou $CET_{aa}$ parcial}
+              \subitem
+              \begin{equation}
+                t_{j ^ \prime + 1} = \begin{cases}
+                  t_{j ^ \prime} + s_{j ^ {\prime \prime}}, & pa_{t,j} - m ^ \prime > 0 \\
+                  t_{j ^ \prime} - s_{j ^ {\prime \prime}}, & pa_{t,j} - m ^ \prime < 0
+                \end{cases}
+              \end{equation}
+        \item{Cálculo do novo valor do parcial, através da reexecução de $g(pa)$}
+              \subitem
+              \begin{equation*}
+                \limitVF \text{, com $pa$ inicial igual a zero}
+              \end{equation*}
+      \end{itemize}
+
+      \vspace{5mm}
+      Portanto, ao final das iterações e de posso do conjunto $T$, para que
+      saibamos o valor do $CET_{am}$, faremos:
+      \begin{equation}
+        CET_{aa} = t_{t} = \sum\limits_{i = 1} ^ {m} t_{i} \text{, com }
+        t_{i} \in T
+      \end{equation}
+    }
+  }
+
+  \subsection{Cálculo do CET ao ano}{
+    O valor do $CET_{aa}$ é dado da seguinte maneira:
+    \begin{equation}
+      CET_{aa} = [(1 + CET_{am}) ^ {12}] - 1
+    \end{equation}
+  }
+
+  \subsection{Cálculo da nota promissória}{
+    O valor do nota ($np$) é dado da seguinte maneira:
+    \begin{equation}
+      np = \mu_{1} \cdot q \cdot 1,3
+    \end{equation}
+  }
+
+  \pagebreak
+ }
